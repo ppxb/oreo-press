@@ -1,50 +1,17 @@
-import { invoke } from '@tauri-apps/api/core'
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import NottEditor from './components/editor'
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState('')
-  const [name, setName] = useState('')
-
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke('greet', { name }))
-  }
+  // async function greet() {
+  //   // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
+  //   setGreetMsg(await invoke('greet', { name }))
+  // }
 
   return (
-    <main className="container">
-      <h1>Welcome to Tauri + React</h1>
-
-      <div className="row">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault()
-          greet()
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={e => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-      <p className="text-2xl text-amber-500">{greetMsg}</p>
-    </main>
+    <div className="w-dvw h-dvh flex">
+      <div className="w-18 bg-amber-200">sidebar</div>
+      <div className="w-100 bg-amber-600">folder</div>
+      <NottEditor />
+    </div>
   )
 }
 
