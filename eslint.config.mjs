@@ -5,6 +5,10 @@ export default antfu({
   pnpm: true,
   react: true,
 
+  rules: {
+    'node/prefer-global/process': 'off',
+  },
+
   ignores: [
     'src-tauri/**',
   ],
