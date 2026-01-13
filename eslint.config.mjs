@@ -1,8 +1,10 @@
 import antfu from '@antfu/eslint-config'
 
 export default antfu({
-  formatters: true,
-  pnpm: true,
+  formatters: {
+    html: true,
+    css: true,
+  },
   react: true,
 
   rules: {
