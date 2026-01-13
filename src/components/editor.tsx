@@ -36,7 +36,7 @@ export default function NottEditor() {
 
           const { from, to } = editor.state.selection
           if (from !== to) {
-            editor.commands.deleteRange({ from, to: editor.state.selection.to })
+            editor.commands.deleteSelection()
           }
 
           editor.commands.insertContent(text, { contentType: 'markdown' })
@@ -47,6 +47,40 @@ export default function NottEditor() {
       },
     },
     onUpdate: ({ editor }) => {
+      const { doc } = editor.state
+      let hasContent = false
+      const emptyParaPositions: number[] = []
+
+      doc.descendants((node, pos) => {
+        if (node.type.name === 'paragraph') {
+          if (node.content.size === 0) {
+            emptyParaPositions.push(pos)
+          }
+          else {
+            hasContent = true
+          }
+        }
+        else if (node.isBlock && node.type.name !== 'doc') {
+          hasContent = true
+        }
+      })
+
+      if (!hasContent && emptyParaPositions.length > 1) {
+        const { tr } = editor.state
+
+        for (let i = emptyParaPositions.length - 1; i > 0; i--) {
+          const pos = emptyParaPositions[i]
+          const node = editor.state.doc.nodeAt(pos)
+          if (node && node.type.name === 'paragraph' && node.content.size === 0) {
+            tr.delete(pos, pos + node.nodeSize)
+          }
+        }
+
+        if (tr.docChanged) {
+          editor.view.dispatch(tr)
+        }
+      }
+
       updateContent(editor)
     },
     onCreate: ({ editor }) => {
