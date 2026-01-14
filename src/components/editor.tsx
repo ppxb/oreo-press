@@ -4,6 +4,7 @@ import { Markdown } from '@tiptap/markdown'
 import { EditorContent, useEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useCallback, useState } from 'react'
+import { EditorProvider } from './provider/editor-provider'
 
 export default function NottEditor() {
   const [serializedContent, setSerializedContent] = useState('')
@@ -91,7 +92,9 @@ export default function NottEditor() {
   return (
     <div className="flex flex-col h-screen w-full bg-gray-50">
       <div className="flex-1 overflow-auto bg-white">
-        <EditorContent editor={editor} />
+        <EditorProvider editor={editor}>
+          <EditorContent editor={editor} />
+        </EditorProvider>
       </div>
       <div className="h-[40vh] shrink-0 overflow-auto bg-gray-100 p-2">
         <h3 className="text-sm font-semibold text-gray-600 mb-3">Markdown Preview</h3>
