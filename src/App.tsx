@@ -9,7 +9,9 @@ function App() {
   return (
     <div className="w-dvw h-dvh flex">
       <div className="w-18 bg-amber-200">sidebar</div>
-      <div className="w-100 bg-amber-600">folder</div>
+      <div className="w-100 bg-amber-600">
+        <h1 className="text-2xl font-bold animate-bounce">halo</h1>
+      </div>
       <NottEditor />
     </div>
   )
