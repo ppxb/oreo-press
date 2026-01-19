@@ -1,7 +1,13 @@
 import { Editor } from '@tiptap/core'
 import { TextSelection } from '@tiptap/pm/state'
 import { BubbleMenu } from '@tiptap/react/menus'
+import { useState } from 'react'
 import { useEditorEditable, useEditorInstance } from '@/store/editor'
+
+function TurnIntoMenu() {
+	const [open, setOpen] = useState(false)
+	const editor = useEditorInstance()
+}
 
 interface BubbleTextMenuProps {
 	buttonBubble?: React.ReactNode
